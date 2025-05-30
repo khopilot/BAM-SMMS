@@ -29,17 +29,17 @@ const Dashboard = () => (
   <div className="p-6">
     <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-card text-card-foreground rounded-lg shadow-md p-6">
         <h2 className="text-xl font-semibold mb-4">Recent Videos</h2>
-        <p className="text-gray-500">No videos uploaded yet</p>
+        <p className="text-muted-foreground">No videos uploaded yet</p>
       </div>
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-card text-card-foreground rounded-lg shadow-md p-6">
         <h2 className="text-xl font-semibold mb-4">Performance</h2>
-        <p className="text-gray-500">No analytics data available</p>
+        <p className="text-muted-foreground">No analytics data available</p>
       </div>
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-card text-card-foreground rounded-lg shadow-md p-6">
         <h2 className="text-xl font-semibold mb-4">Tasks</h2>
-        <p className="text-gray-500">No pending tasks</p>
+        <p className="text-muted-foreground">No pending tasks</p>
       </div>
     </div>
   </div>
@@ -60,14 +60,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   ];
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-background">
       {/* Mobile sidebar toggle */}
       <div className="lg:hidden fixed top-4 left-4 z-50">
         <Button 
           variant="outline" 
           size="icon" 
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="bg-white"
+          className="bg-background"
         >
           {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </Button>
@@ -75,14 +75,17 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
       {/* Sidebar */}
       <div 
-        className={`fixed inset-y-0 left-0 z-40 w-64 bg-[#0A1A2F] text-white transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-40 w-64 bg-primary text-primary-foreground transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="flex items-center justify-center h-16 border-b border-blue-800">
-            <h1 className="text-2xl font-bold text-white">BAM</h1>
+          <div className="flex items-center justify-center h-16 border-b border-sidebar-border">
+            <div className="flex items-center space-x-2">
+              <div className="bg-accent text-accent-foreground w-8 h-8 rounded-md flex items-center justify-center font-bold">B</div>
+              <h1 className="text-2xl font-bold text-primary-foreground">BAM</h1>
+            </div>
           </div>
 
           {/* Navigation */}
@@ -92,7 +95,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 <li key={item.path}>
                   <Link
                     to={item.path}
-                    className="flex items-center px-4 py-3 text-sm rounded-md hover:bg-blue-800 transition-colors"
+                    className="flex items-center px-4 py-3 text-sm rounded-md hover:bg-secondary transition-colors"
                     onClick={() => window.innerWidth < 1024 && setSidebarOpen(false)}
                   >
                     <span className="mr-3">{item.icon}</span>
@@ -104,13 +107,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           </nav>
 
           {/* User profile */}
-          <div className="p-4 border-t border-blue-800">
+          <div className="p-4 border-t border-sidebar-border">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="w-full flex items-center justify-start px-4 py-2 text-sm text-white hover:bg-blue-800 transition-colors">
+                <Button variant="ghost" className="w-full flex items-center justify-start px-4 py-2 text-sm text-primary-foreground hover:bg-secondary transition-colors">
                   <Avatar className="h-8 w-8 mr-2">
                     <AvatarImage src="/avatar.png" />
-                    <AvatarFallback className="bg-blue-500">BA</AvatarFallback>
+                    <AvatarFallback className="bg-secondary text-secondary-foreground">BA</AvatarFallback>
                   </Avatar>
                   <span>BAM Admin</span>
                 </Button>

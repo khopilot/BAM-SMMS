@@ -1,6 +1,6 @@
-import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
+import { useState, useMemo, useRef, useCallback } from 'react';
 import {
-  LayoutGrid, List, Search as SearchIcon, Filter as FilterIcon, UploadCloud, PlusCircle, Trash2, Edit3, Download, Share2, Copy, Eye, Info, Settings, Sparkles, History, Users2, BarChart2, FolderKanban, Tags, CalendarDays, CheckCircle2, XCircle, AlertTriangle, Maximize2, Minimize2, ChevronDown, ChevronUp, FileText, ImageIcon, Video, Music2, Font, Palette, Briefcase, Bot, RotateCcw, ZoomIn, ZoomOut, GripVertical, ExternalLink, Link as LinkIcon, MessageSquare, Star, Zap, Loader2, FolderPlus, FolderSymlink, FolderCog, PackageSearch, Lightbulb, Layers3, Columns, Rows, ChevronsUpDown, Check, DatabaseZap, BrainCircuit, ImagePlus, Type as TypeIcon, SlidersHorizontal, Clock, TrendingUp, ShieldCheck, ChevronLeft // Added TrendingUp, ShieldCheck, ChevronLeft
+  LayoutGrid, List, Search as SearchIcon, UploadCloud, Trash2, Download, Share2, Eye, Sparkles, FolderKanban, Tags, CheckCircle2, XCircle, Maximize2, FileText, ImageIcon, Music2, Palette, Briefcase, Bot, RotateCcw, ZoomIn, ExternalLink, Loader2, FolderPlus, FolderSymlink, PackageSearch, Layers3, ChevronsUpDown, Check, DatabaseZap, Type as TypeIcon, Clock, TrendingUp, ShieldCheck, ChevronLeft
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
@@ -10,19 +10,19 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { ScrollArea, ScrollBar } from './ui/scroll-area';
 import { Badge } from './ui/badge';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+// import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'; // Unused
 import { Separator } from './ui/separator';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from './ui/select';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from './ui/dialog';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, SheetClose, SheetFooter } from './ui/sheet';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from './ui/dialog';
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetClose, SheetFooter } from './ui/sheet';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from './ui/command';
 import { Label } from './ui/label';
 import { Checkbox } from './ui/checkbox';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
-import { LineChart, Line, BarChart as RechartsBarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, Sector } from 'recharts'; // Renamed BarChart to avoid conflict
-import { format, subDays, parseISO, isValid, differenceInDays } from 'date-fns';
-import { invoke } from '@tauri-apps/api/tauri'; // For simulated backend calls
+import { BarChart as RechartsBarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { format, subDays, parseISO, differenceInDays } from 'date-fns';
+// import { invoke } from '@tauri-apps/api/tauri'; // For simulated backend calls - unused
 
 // TypeScript Interfaces
 type AssetType = 'Image' | 'Video' | 'Audio' | 'Document' | 'Font' | 'Template' | 'Logo' | 'Icon Set' | 'Presentation';
@@ -198,7 +198,7 @@ const AssetLibrary = () => {
   const [aiGenerationTasks, setAiGenerationTasks] = useState<AIGenerationTask[]>([]);
   const [currentAIGenType, setCurrentAIGenType] = useState<'Thumbnail' | 'LogoVariation' | 'SocialMediaPost' | 'PresentationSlide' | null>(null);
   const [aiGenPrompt, setAiGenPrompt] = useState('');
-  const [aiSourceAssetId, setAiSourceAssetId] = useState<string | null>(null);
+  const [aiSourceAssetId, setAiSourceAssetId] = useState<string | undefined>(undefined); // Changed to undefined
   const [isGeneratingAsset, setIsGeneratingAsset] = useState(false);
 
   const [uploadFiles, setUploadFiles] = useState<File[]>([]);
@@ -341,13 +341,13 @@ const AssetLibrary = () => {
     );
   };
 
-  const handleSelectAll = () => {
-    if (selectedAssets.length === filteredAndSortedAssets.length) {
-      setSelectedAssets([]);
-    } else {
-      setSelectedAssets(filteredAndSortedAssets.map(a => a.id));
-    }
-  };
+  // const handleSelectAll = () => { // Unused function
+  //   if (selectedAssets.length === filteredAndSortedAssets.length) {
+  //     setSelectedAssets([]);
+  //   } else {
+  //     setSelectedAssets(filteredAndSortedAssets.map(a => a.id));
+  //   }
+  // };
   
   const handleBulkDelete = () => {
     if (window.confirm(`Are you sure you want to delete ${selectedAssets.length} assets? This action cannot be undone.`)) {
@@ -402,7 +402,7 @@ const AssetLibrary = () => {
       setIsGeneratingAsset(false);
       setCurrentAIGenType(null);
       setAiGenPrompt('');
-      setAiSourceAssetId(null);
+      setAiSourceAssetId(undefined);
       alert(`AI ${currentAIGenType} generation complete!`);
     }, 3000);
   };
@@ -696,13 +696,13 @@ const AssetLibrary = () => {
                         </CardContent>
                         <CardFooter className="p-2 border-t flex justify-end gap-1">
                             <TooltipProvider><Tooltip><TooltipTrigger asChild>
-                                <Button variant="ghost" size="iconXs" onClick={() => openAssetDetail(asset)}><Eye className="h-3.5 w-3.5"/></Button>
+                                <Button variant="ghost" size="icon" onClick={() => openAssetDetail(asset)}><Eye className="h-3.5 w-3.5"/></Button>
                             </TooltipTrigger><TooltipContent>View Details</TooltipContent></Tooltip></TooltipProvider>
                             <TooltipProvider><Tooltip><TooltipTrigger asChild>
-                                <Button variant="ghost" size="iconXs" onClick={() => alert(`Downloading ${asset.name}`)}><Download className="h-3.5 w-3.5"/></Button>
+                                <Button variant="ghost" size="icon" onClick={() => alert(`Downloading ${asset.name}`)}><Download className="h-3.5 w-3.5"/></Button>
                             </TooltipTrigger><TooltipContent>Download</TooltipContent></Tooltip></TooltipProvider>
                             <TooltipProvider><Tooltip><TooltipTrigger asChild>
-                                <Button variant="ghost" size="iconXs" onClick={() => alert(`Sharing ${asset.name}`)}><Share2 className="h-3.5 w-3.5"/></Button>
+                                <Button variant="ghost" size="icon" onClick={() => alert(`Sharing ${asset.name}`)}><Share2 className="h-3.5 w-3.5"/></Button>
                             </TooltipTrigger><TooltipContent>Share</TooltipContent></Tooltip></TooltipProvider>
                         </CardFooter>
                         </Card>
@@ -753,7 +753,7 @@ const AssetLibrary = () => {
                   </SelectContent>
                 </Select>
                 {currentAIGenType === 'LogoVariation' && (
-                    <Select onValueChange={setAiSourceAssetId}>
+                    <Select value={aiSourceAssetId} onValueChange={setAiSourceAssetId}>
                         <SelectTrigger><SelectValue placeholder="Select source logo..." /></SelectTrigger>
                         <SelectContent>
                             {assets.filter(a => a.type === 'Logo').map(logo => <SelectItem key={logo.id} value={logo.id}>{logo.name}</SelectItem>)}
@@ -786,7 +786,7 @@ const AssetLibrary = () => {
                       </div>
                       {task.status === 'Processing' && <Progress value={Math.random()*80+10} className="h-1.5 mt-2"/>}
                       {task.status === 'Completed' && task.resultAssetId && (
-                        <Button size="xs" variant="link" className="p-0 h-auto mt-1" onClick={() => openAssetDetail(assets.find(a=>a.id===task.resultAssetId)!)}>View Result</Button>
+                        <Button size="sm" variant="link" className="p-0 h-auto mt-1" onClick={() => openAssetDetail(assets.find(a=>a.id===task.resultAssetId)!)}>View Result</Button>
                       )}
                     </Card>
                   ))}
@@ -820,8 +820,8 @@ const AssetLibrary = () => {
                         <CardContent className="h-[250px]">
                             <ResponsiveContainer width="100%" height="100%">
                                 <PieChart>
-                                    <Pie data={Object.entries(assets.reduce((acc, asset) => { acc[asset.type] = (acc[asset.type] || 0) + 1; return acc; }, {} as Record<string, number>)).map(([name, value]) => ({name, value}))} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
-                                      {Object.entries(assets.reduce((acc, asset) => { acc[asset.type] = (acc[asset.type] || 0) + 1; return acc; }, {})).map((_, index) => (
+                                    <Pie data={Object.entries(assets.reduce((acc, asset) => { acc[asset.type] = (acc[asset.type] || 0) + 1; return acc; }, {} as Record<AssetType, number>)).map(([name, value]) => ({name, value}))} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
+                                      {Object.entries(assets.reduce((acc, asset) => { acc[asset.type] = (acc[asset.type] || 0) + 1; return acc; }, {} as Record<AssetType, number>)).map((_, index) => (
                                         <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
                                       ))}
                                     </Pie>
@@ -993,8 +993,8 @@ const AssetLibrary = () => {
                         <p className="text-xs text-muted-foreground">By: {v.editor}</p>
                         <p className="mt-1 text-xs">{v.notes}</p>
                         <div className="mt-2 flex gap-2">
-                          <Button size="xs" variant="outline"><Eye className="h-3 w-3 mr-1"/> Preview</Button>
-                          {v.versionNumber !== selectedAssetDetail.versions.length && <Button size="xs" variant="outline"><RotateCcw className="h-3 w-3 mr-1"/> Revert to this</Button>}
+                          <Button size="sm" variant="outline"><Eye className="h-3 w-3 mr-1"/> Preview</Button>
+                          {v.versionNumber !== selectedAssetDetail.versions.length && <Button size="sm" variant="outline"><RotateCcw className="h-3 w-3 mr-1"/> Revert to this</Button>}
                         </div>
                       </div>
                     ))}
@@ -1007,7 +1007,7 @@ const AssetLibrary = () => {
                       <div key={i} className="p-3 border rounded-md">
                         <p className="font-medium">{use.itemName}</p>
                         <p className="text-xs text-muted-foreground">Module: {use.moduleId} | Used on: {format(parseISO(use.dateUsed), 'PP')}</p>
-                        {use.link && <Button size="xs" variant="link" className="p-0 h-auto" onClick={() => alert(`Navigate to ${use.link}`)}>View Context</Button>}
+                        {use.link && <Button size="sm" variant="link" className="p-0 h-auto" onClick={() => alert(`Navigate to ${use.link}`)}>View Context</Button>}
                       </div>
                     ))}
                   </CardContent></Card>
