@@ -707,31 +707,34 @@ const ContentAssistant = () => {
   const getCurrentContentTemplate = () => contentTemplates.find(t => t.id === selectedContentTemplate);
   
   return (
-    <div className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6">
-      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">Content Assistant</h1>
+    <div className="p-6">
+      <h1 className="text-3xl font-bold mb-6">Content Assistant</h1>
       
-      <Tabs defaultValue="titles" className="space-y-4 sm:space-y-6">
-        <TabsList className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-1 sm:gap-2 h-auto">
-          <TabsTrigger value="titles" className="text-xs sm:text-sm px-2 sm:px-3 py-2">
-            <span className="hidden sm:inline">Title</span>
-            <span className="sm:hidden">Titles</span>
+      <Tabs defaultValue="script">
+        <TabsList className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 mb-6">
+          <TabsTrigger value="script" className="flex items-center">
+            <FileText className="h-4 w-4 mr-2" />
+            <span>Script Generator</span>
           </TabsTrigger>
-          <TabsTrigger value="descriptions" className="text-xs sm:text-sm px-2 sm:px-3 py-2">
-            <span className="hidden sm:inline">Description</span>
-            <span className="sm:hidden">Desc</span>
+          <TabsTrigger value="voice" className="flex items-center">
+            <Mic className="h-4 w-4 mr-2" />
+            <span>Voice-over</span>
           </TabsTrigger>
-          <TabsTrigger value="hashtags" className="text-xs sm:text-sm px-2 sm:px-3 py-2">
-            <span className="hidden sm:inline">Hashtags</span>
-            <span className="sm:hidden">Tags</span>
+          <TabsTrigger value="meme" className="flex items-center">
+            <MessageSquare className="h-4 w-4 mr-2" />
+            <span>Meme Captions</span>
           </TabsTrigger>
-          <TabsTrigger value="voice" className="text-xs sm:text-sm px-2 sm:px-3 py-2">Voice</TabsTrigger>
-          <TabsTrigger value="variations" className="text-xs sm:text-sm px-2 sm:px-3 py-2">
-            <span className="hidden sm:inline">Variations</span>
-            <span className="sm:hidden">Vars</span>
+          <TabsTrigger value="narrative" className="flex items-center">
+            <Shuffle className="h-4 w-4 mr-2" />
+            <span>Narrative Spinner</span>
           </TabsTrigger>
-          <TabsTrigger value="research" className="text-xs sm:text-sm px-2 sm:px-3 py-2">
-            <span className="hidden sm:inline">Research</span>
-            <span className="sm:hidden">Info</span>
+          <TabsTrigger value="templates" className="flex items-center">
+            <Layers className="h-4 w-4 mr-2" />
+            <span>Content Templates</span>
+          </TabsTrigger>
+          <TabsTrigger value="research" className="flex items-center">
+            <Search className="h-4 w-4 mr-2" />
+            <span>Topic Research</span>
           </TabsTrigger>
         </TabsList>
         
