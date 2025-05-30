@@ -15,7 +15,8 @@ import {
   MoreVertical,
   Edit,
   Trash,
-  Image
+  Image,
+  Download
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -158,6 +159,7 @@ const VideoManagement = () => {
   const [dragActive, setDragActive] = useState(false);
   const [isGeneratingAI, setIsGeneratingAI] = useState(false);
   const [aiSuggestions, setAiSuggestions] = useState<{title: string, description: string} | null>(null);
+  const [selectedAspectRatio, setSelectedAspectRatio] = useState<'9:16' | '16:9'>('9:16');
   
   const videoRef = useRef<HTMLVideoElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -604,6 +606,16 @@ const VideoManagement = () => {
                 <p className="text-xs text-gray-400 mt-1">
                   Supports MP4, MOV, AVI, WebM (max 500MB)
                 </p>
+                <div className="mt-3 p-2 bg-gray-50 rounded-md border">
+                  <div className="flex items-center justify-center gap-2">
+                    <Badge variant={selectedAspectRatio === '9:16' ? 'default' : 'outline'} className="text-sm" style={{ backgroundColor: selectedAspectRatio === '16:9' ? '#1F31C7' : undefined, color: selectedAspectRatio === '16:9' ? '#FFFFFF' : undefined }}>
+                      {selectedAspectRatio} {selectedAspectRatio === '9:16' ? '(Vertical)' : '(Horizontal)'}
+                    </Badge>
+                    <span className="text-xs text-gray-500">
+                      Optimized for {selectedAspectRatio === '9:16' ? 'TikTok, Reels' : 'YouTube, Facebook'}
+                    </span>
+                  </div>
+                </div>
               </div>
               
               {/* Video List */}
@@ -881,6 +893,81 @@ const VideoManagement = () => {
                         </Select>
                       </div>
                       
+                      {/* Video Aspect Ratio */}
+                      <div className="space-y-2">
+                        <Label htmlFor="aspect-ratio">Video Format</Label>
+                        <div className="grid grid-cols-2 gap-3">
+                          <Card 
+                            className={`cursor-pointer hover:shadow-md transition-shadow border-2 ${
+                              selectedAspectRatio === '9:16' ? 'border-primary bg-primary/5' : 'border-muted'
+                            }`}
+                            onClick={() => setSelectedAspectRatio('9:16')}
+                          >
+                            <CardContent className="p-4 text-center">
+                              <div className="w-12 h-20 bg-primary/20 border-2 border-primary rounded mx-auto mb-2 flex items-center justify-center">
+                                <span className="text-xs font-bold text-primary">9:16</span>
+                              </div>
+                              <h4 className="font-semibold text-sm">TikTok / Reels</h4>
+                              <p className="text-xs text-muted-foreground">1080x1920px</p>
+                              <Badge variant="default" className="mt-1 text-xs">Vertical</Badge>
+                            </CardContent>
+                          </Card>
+                          
+                          <Card 
+                            className={`cursor-pointer hover:shadow-md transition-shadow border-2 ${
+                              selectedAspectRatio === '16:9' ? 'border-blue-600 bg-blue-50' : 'border-muted'
+                            }`}
+                            onClick={() => setSelectedAspectRatio('16:9')}
+                          >
+                            <CardContent className="p-4 text-center">
+                              <div className="w-20 h-12 bg-blue-500/20 border-2 border-blue-500 rounded mx-auto mb-2 flex items-center justify-center">
+                                <span className="text-xs font-bold text-blue-600">16:9</span>
+                              </div>
+                              <h4 className="font-semibold text-sm">YouTube / FB</h4>
+                              <p className="text-xs text-muted-foreground">1920x1080px</p>
+                              <Badge variant="secondary" className="mt-1 text-xs">Horizontal</Badge>
+                            </CardContent>
+                          </Card>
+                        </div>
+                        
+                        <div className="p-3 bg-muted/50 rounded-lg">
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm font-medium">Selected Format:</span>
+                            <Badge variant={selectedAspectRatio === '9:16' ? 'default' : 'outline'} className="text-sm" style={{ backgroundColor: selectedAspectRatio === '16:9' ? '#1F31C7' : undefined, color: selectedAspectRatio === '16:9' ? '#FFFFFF' : undefined }}>
+                              {selectedAspectRatio} {selectedAspectRatio === '9:16' ? '(Vertical)' : '(Horizontal)'}
+                            </Badge>
+                          </div>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            {selectedAspectRatio === '9:16' 
+                              ? 'Perfect for TikTok, Instagram Reels, and YouTube Shorts' 
+                              : 'Ideal for YouTube videos, Facebook posts, and presentations'
+                            }
+                          </p>
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <Label className="text-sm font-medium">Platform Guidelines:</Label>
+                          <div className="text-xs space-y-1 text-muted-foreground">
+                            <div className="flex justify-between">
+                              <span>• TikTok:</span>
+                              <span>9:16 (1080x1920) - Max 60s</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>• Instagram Reels:</span>
+                              <span>9:16 (1080x1920) - Max 90s</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>• YouTube Shorts:</span>
+                              <span>9:16 (1080x1920) - Max 60s</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>• YouTube:</span>
+                              <span>16:9 (1920x1080) - Any length</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
                       {/* Tags */}
                       <div className="space-y-2">
                         <Label htmlFor="tags">Tags</Label>
@@ -940,7 +1027,15 @@ const VideoManagement = () => {
                       </div>
                     </div>
                   </CardContent>
-                  <CardFooter className="flex justify-end">
+                  <CardFooter className="flex justify-between">
+                    <Button
+                      variant="outline"
+                      onClick={() => alert(`Exporting ${selectedAspectRatio} template for video editing tools`)}
+                      disabled={selectedVideo.status === 'uploading' || selectedVideo.status === 'processing'}
+                    >
+                      <Download className="h-4 w-4 mr-2" />
+                      Export {selectedAspectRatio} Template
+                    </Button>
                     <Button
                       disabled={selectedVideo.status === 'uploading' || selectedVideo.status === 'processing'}
                     >

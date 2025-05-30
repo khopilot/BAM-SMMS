@@ -21,14 +21,14 @@ import { Label } from './ui/label';
 // BAM Brand Guidelines Definitions
 const BAM_COLORS = {
   primary: [
-    { name: 'Deep Blue', hex: '#0A1A2F', usage: 'Backgrounds, Dark UI Elements' },
-    { name: 'Electric Blue', hex: '#2563EB', usage: 'Primary CTAs, Accents, Highlights' },
-    { name: 'White', hex: '#FFFFFF', usage: 'Text on dark backgrounds, UI Elements' },
+    { name: 'Brand Red', hex: '#FA1F15', usage: 'Primary CTAs, Main Branding, Logo' },
+    { name: 'Brand Blue', hex: '#1F31C7', usage: 'Secondary CTAs, UI Elements, Accents' },
+    { name: 'Brand Yellow', hex: '#FEC802', usage: 'Highlights, Warning States, Energy' },
   ],
   secondary: [
-    { name: 'Orange', hex: '#FF6B35', usage: 'Secondary CTAs, Warnings, Energetic Accents' },
-    { name: 'Green', hex: '#10B981', usage: 'Success States, Positive Feedback, Eco/Growth themes' },
-    { name: 'Purple', hex: '#8B5CF6', usage: 'Creative Accents, Special Features, Youthful Vibe' },
+    { name: 'Deep Blue', hex: '#0A1A2F', usage: 'Backgrounds, Dark UI Elements' },
+    { name: 'White', hex: '#FFFFFF', usage: 'Text on dark backgrounds, UI Elements' },
+    { name: 'Green', hex: '#10B981', usage: 'Success States, Positive Feedback' },
   ],
   neutral: [
     { name: 'Light Gray', hex: '#F3F4F6', usage: 'Light backgrounds, Dividers' },
@@ -125,6 +125,8 @@ const BrandIdentity = () => {
   const [realTimeText, setRealTimeText] = useState('');
   const [realTimeTone, setRealTimeTone] = useState('neutral');
   const [realTimeAnalysis, setRealTimeAnalysis] = useState<string[]>([]);
+
+  const [selectedAspectRatio, setSelectedAspectRatio] = useState<'9:16' | '16:9'>('9:16');
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -695,7 +697,7 @@ const BrandIdentity = () => {
 
         {/* Tools Tab */}
         <TabsContent value="tools" className="mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <Card>
                     <CardHeader>
                         <CardTitle className="flex items-center"><Edit3 className="h-5 w-5 mr-2 text-primary" /> Real-time Text Analyzer (Beta)</CardTitle>
@@ -737,6 +739,86 @@ const BrandIdentity = () => {
                         </Button>
                     </CardFooter>
                 </Card>
+                
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="flex items-center"><Type className="h-5 w-5 mr-2 text-primary" /> Video Aspect Ratio Selector</CardTitle>
+                        <CardDescription>Choose optimal video dimensions for different platforms.</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                        <div className="space-y-3">
+                            <div className="grid grid-cols-2 gap-3">
+                                <Card className="cursor-pointer hover:shadow-md transition-shadow border-2 border-primary" onClick={() => setSelectedAspectRatio('9:16')} style={{ backgroundColor: selectedAspectRatio === '9:16' ? 'rgba(37, 99, 235, 0.1)' : 'transparent' }}>
+                                    <CardContent className="p-4 text-center">
+                                        <div className="w-16 h-28 bg-primary/20 border-2 border-primary rounded mx-auto mb-2 flex items-center justify-center">
+                                            <span className="text-xs font-bold text-primary">9:16</span>
+                                        </div>
+                                        <h4 className="font-semibold text-sm">TikTok / Reels</h4>
+                                        <p className="text-xs text-muted-foreground">1080x1920px</p>
+                                        <Badge variant="default" className="mt-1 text-xs">Vertical</Badge>
+                                    </CardContent>
+                                </Card>
+                                
+                                <Card className="cursor-pointer hover:shadow-md transition-shadow border-2 border-muted" onClick={() => setSelectedAspectRatio('16:9')} style={{ backgroundColor: selectedAspectRatio === '16:9' ? 'rgba(31, 49, 199, 0.1)' : 'transparent', borderColor: selectedAspectRatio === '16:9' ? '#1F31C7' : undefined }}>
+                                    <CardContent className="p-4 text-center">
+                                        <div className="w-28 h-16 bg-blue-500/20 border-2 border-blue-500 rounded mx-auto mb-2 flex items-center justify-center">
+                                            <span className="text-xs font-bold text-blue-600">16:9</span>
+                                        </div>
+                                        <h4 className="font-semibold text-sm">YouTube / FB</h4>
+                                        <p className="text-xs text-muted-foreground">1920x1080px</p>
+                                        <Badge variant="secondary" className="mt-1 text-xs">Horizontal</Badge>
+                                    </CardContent>
+                                </Card>
+                            </div>
+                            
+                            <div className="p-3 bg-muted/50 rounded-lg">
+                                <div className="flex items-center justify-between">
+                                    <span className="text-sm font-medium">Selected Format:</span>
+                                    <Badge variant={selectedAspectRatio === '9:16' ? 'default' : 'secondary'} className="text-sm">
+                                        {selectedAspectRatio} {selectedAspectRatio === '9:16' ? '(Vertical)' : '(Horizontal)'}
+                                    </Badge>
+                                </div>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                    {selectedAspectRatio === '9:16' 
+                                        ? 'Perfect for TikTok, Instagram Reels, and YouTube Shorts' 
+                                        : 'Ideal for YouTube videos, Facebook posts, and presentations'
+                                    }
+                                </p>
+                            </div>
+                            
+                            <div className="space-y-2">
+                                <Label className="text-sm font-medium">Platform Guidelines:</Label>
+                                <div className="text-xs space-y-1 text-muted-foreground">
+                                    <div className="flex justify-between">
+                                        <span>• TikTok:</span>
+                                        <span>9:16 (1080x1920) - Max 60s</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>• Instagram Reels:</span>
+                                        <span>9:16 (1080x1920) - Max 90s</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>• YouTube Shorts:</span>
+                                        <span>9:16 (1080x1920) - Max 60s</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>• YouTube:</span>
+                                        <span>16:9 (1920x1080) - Any length</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </CardContent>
+                    <CardFooter className="flex gap-2">
+                        <Button size="sm" variant="outline" className="flex-1" onClick={() => alert(`Exporting ${selectedAspectRatio} template for design tools`)}>
+                            <DownloadCloud className="h-4 w-4 mr-1" /> {selectedAspectRatio} Template
+                        </Button>
+                        <Button size="sm" variant="default" className="flex-1" onClick={() => alert(`Creating new ${selectedAspectRatio} project with BAM branding`)}>
+                            <Sparkles className="h-4 w-4 mr-1" /> New Project
+                        </Button>
+                    </CardFooter>
+                </Card>
+                
                 <Card>
                     <CardHeader>
                         <CardTitle className="flex items-center"><FileText className="h-5 w-5 mr-2 text-primary" /> Brand Guideline Templates</CardTitle>
