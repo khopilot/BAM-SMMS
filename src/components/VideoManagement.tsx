@@ -558,24 +558,29 @@ const VideoManagement = () => {
   };
   
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">Video Management</h1>
+    <div className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6">
+      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">Video Management</h1>
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column - Video List */}
-        <div className="lg:col-span-1">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
+        {/* Video List */}
+        <div className="xl:col-span-1">
           <Card>
-            <CardHeader>
-              <CardTitle className="flex justify-between items-center">
-                <span>Your Videos</span>
-                <Button onClick={handleUploadClick} size="sm">
-                  <Upload className="h-4 w-4 mr-2" />
-                  Upload
+            <CardHeader className="pb-3 sm:pb-4">
+              <CardTitle className="text-lg sm:text-xl flex items-center justify-between">
+                <span className="flex items-center">
+                  <Upload className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary flex-shrink-0" />
+                  <span className="truncate">Video Library</span>
+                </span>
+                <Button 
+                  onClick={handleUpload} 
+                  size="sm" 
+                  className="ml-2 flex-shrink-0 px-2 sm:px-3"
+                  disabled={isUploading}
+                >
+                  <Plus className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                  <span className="hidden sm:inline">Upload</span>
                 </Button>
               </CardTitle>
-              <CardDescription>
-                Manage your video content
-              </CardDescription>
             </CardHeader>
             <CardContent>
               <input
@@ -669,7 +674,7 @@ const VideoManagement = () => {
         </div>
         
         {/* Right Column - Video Editor */}
-        <div className="lg:col-span-2">
+        <div className="xl:col-span-2">
           {selectedVideo ? (
             <Tabs defaultValue="preview">
               <TabsList className="grid w-full grid-cols-3">
@@ -896,18 +901,18 @@ const VideoManagement = () => {
                       {/* Video Aspect Ratio */}
                       <div className="space-y-2">
                         <Label htmlFor="aspect-ratio">Video Format</Label>
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           <Card 
                             className={`cursor-pointer hover:shadow-md transition-shadow border-2 ${
                               selectedAspectRatio === '9:16' ? 'border-primary bg-primary/5' : 'border-muted'
                             }`}
                             onClick={() => setSelectedAspectRatio('9:16')}
                           >
-                            <CardContent className="p-4 text-center">
-                              <div className="w-12 h-20 bg-primary/20 border-2 border-primary rounded mx-auto mb-2 flex items-center justify-center">
+                            <CardContent className="p-3 sm:p-4 text-center">
+                              <div className="w-8 h-14 sm:w-12 sm:h-20 bg-primary/20 border-2 border-primary rounded mx-auto mb-2 flex items-center justify-center">
                                 <span className="text-xs font-bold text-primary">9:16</span>
                               </div>
-                              <h4 className="font-semibold text-sm">TikTok / Reels</h4>
+                              <h4 className="font-semibold text-xs sm:text-sm">TikTok / Reels</h4>
                               <p className="text-xs text-muted-foreground">1080x1920px</p>
                               <Badge variant="default" className="mt-1 text-xs">Vertical</Badge>
                             </CardContent>
@@ -919,11 +924,11 @@ const VideoManagement = () => {
                             }`}
                             onClick={() => setSelectedAspectRatio('16:9')}
                           >
-                            <CardContent className="p-4 text-center">
-                              <div className="w-20 h-12 bg-blue-500/20 border-2 border-blue-500 rounded mx-auto mb-2 flex items-center justify-center">
+                            <CardContent className="p-3 sm:p-4 text-center">
+                              <div className="w-14 h-8 sm:w-20 sm:h-12 bg-blue-500/20 border-2 border-blue-500 rounded mx-auto mb-2 flex items-center justify-center">
                                 <span className="text-xs font-bold text-blue-600">16:9</span>
                               </div>
-                              <h4 className="font-semibold text-sm">YouTube / FB</h4>
+                              <h4 className="font-semibold text-xs sm:text-sm">YouTube / FB</h4>
                               <p className="text-xs text-muted-foreground">1920x1080px</p>
                               <Badge variant="secondary" className="mt-1 text-xs">Horizontal</Badge>
                             </CardContent>

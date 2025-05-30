@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useCallback } from 'react';
 import {
-  LayoutGrid, List, Search as SearchIcon, UploadCloud, Trash2, Download, Share2, Eye, Sparkles, FolderKanban, Tags, CheckCircle2, XCircle, Maximize2, FileText, ImageIcon, Palette, Briefcase, Bot, RotateCcw, ZoomIn, ExternalLink, Loader2, FolderPlus, FolderSymlink, PackageSearch, Layers3, ChevronsUpDown, Check, DatabaseZap, Type as TypeIcon, Clock, TrendingUp, ShieldCheck, ChevronLeft
+  LayoutGrid, List, Search as SearchIcon, UploadCloud, Trash2, Download, Share2, Eye, Sparkles, FolderKanban, Tags, CheckCircle2, XCircle, Maximize2, FileText, ImageIcon, Palette, Briefcase, Bot, RotateCcw, ZoomIn, ExternalLink, Loader2, FolderPlus, FolderSymlink, PackageSearch, Layers3, ChevronsUpDown, Check, DatabaseZap, Type as TypeIcon, Clock, TrendingUp, ShieldCheck, ChevronLeft, FolderOpen
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
@@ -476,12 +476,12 @@ const AssetLibrary = () => {
   };
 
   return (
-    <div className="p-4 md:p-6 space-y-6 h-full flex flex-col">
+    <div className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6">
+      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold flex items-center">
+        <FolderOpen className="h-6 w-6 sm:h-8 sm:w-8 mr-2 sm:mr-3 text-primary flex-shrink-0" />
+        <span className="truncate">Asset Library</span>
+      </h1>
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-        <h1 className="text-2xl md:text-3xl font-bold flex items-center">
-          <DatabaseZap className="h-8 w-8 mr-3 text-primary" />
-          Asset Library
-        </h1>
         <div className="flex items-center gap-2">
           <Button onClick={() => setIsUploadModalOpen(true)}>
             <UploadCloud className="mr-2 h-4 w-4" /> Upload Assets

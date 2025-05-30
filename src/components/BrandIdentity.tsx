@@ -249,19 +249,19 @@ const BrandIdentity = () => {
   };
 
   return (
-    <div className="p-4 md:p-6 space-y-6">
-      <h1 className="text-2xl md:text-3xl font-bold flex items-center">
-        <ShieldCheck className="h-8 w-8 mr-3 text-primary" />
-        Brand Identity Manager
+    <div className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6">
+      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold flex items-center">
+        <ShieldCheck className="h-6 w-6 sm:h-8 sm:w-8 mr-2 sm:mr-3 text-primary flex-shrink-0" />
+        <span className="truncate">Brand Identity Manager</span>
       </h1>
 
       <Tabs defaultValue="dashboard">
-        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
-          <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
-          <TabsTrigger value="validator">Validator</TabsTrigger>
-          <TabsTrigger value="styleguide">Style Guide</TabsTrigger>
-          <TabsTrigger value="assets">Asset Library</TabsTrigger>
-          <TabsTrigger value="tools">Tools</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-1 sm:gap-2 h-auto">
+          <TabsTrigger value="dashboard" className="text-xs sm:text-sm px-2 sm:px-3 py-2">Dashboard</TabsTrigger>
+          <TabsTrigger value="validator" className="text-xs sm:text-sm px-2 sm:px-3 py-2">Validator</TabsTrigger>
+          <TabsTrigger value="styleguide" className="text-xs sm:text-sm px-2 sm:px-3 py-2">Style Guide</TabsTrigger>
+          <TabsTrigger value="assets" className="text-xs sm:text-sm px-2 sm:px-3 py-2">Asset Library</TabsTrigger>
+          <TabsTrigger value="tools" className="text-xs sm:text-sm px-2 sm:px-3 py-2">Tools</TabsTrigger>
         </TabsList>
 
         {/* Dashboard Tab */}
@@ -747,24 +747,24 @@ const BrandIdentity = () => {
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="space-y-3">
-                            <div className="grid grid-cols-2 gap-3">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <Card className="cursor-pointer hover:shadow-md transition-shadow border-2 border-primary" onClick={() => setSelectedAspectRatio('9:16')} style={{ backgroundColor: selectedAspectRatio === '9:16' ? 'rgba(37, 99, 235, 0.1)' : 'transparent' }}>
-                                    <CardContent className="p-4 text-center">
-                                        <div className="w-16 h-28 bg-primary/20 border-2 border-primary rounded mx-auto mb-2 flex items-center justify-center">
+                                    <CardContent className="p-3 sm:p-4 text-center">
+                                        <div className="w-12 h-20 sm:w-16 sm:h-28 bg-primary/20 border-2 border-primary rounded mx-auto mb-2 flex items-center justify-center">
                                             <span className="text-xs font-bold text-primary">9:16</span>
                                         </div>
-                                        <h4 className="font-semibold text-sm">TikTok / Reels</h4>
+                                        <h4 className="font-semibold text-xs sm:text-sm">TikTok / Reels</h4>
                                         <p className="text-xs text-muted-foreground">1080x1920px</p>
                                         <Badge variant="default" className="mt-1 text-xs">Vertical</Badge>
                                     </CardContent>
                                 </Card>
                                 
                                 <Card className="cursor-pointer hover:shadow-md transition-shadow border-2 border-muted" onClick={() => setSelectedAspectRatio('16:9')} style={{ backgroundColor: selectedAspectRatio === '16:9' ? 'rgba(31, 49, 199, 0.1)' : 'transparent', borderColor: selectedAspectRatio === '16:9' ? '#1F31C7' : undefined }}>
-                                    <CardContent className="p-4 text-center">
-                                        <div className="w-28 h-16 bg-blue-500/20 border-2 border-blue-500 rounded mx-auto mb-2 flex items-center justify-center">
+                                    <CardContent className="p-3 sm:p-4 text-center">
+                                        <div className="w-20 h-12 sm:w-28 sm:h-16 bg-blue-500/20 border-2 border-blue-500 rounded mx-auto mb-2 flex items-center justify-center">
                                             <span className="text-xs font-bold text-blue-600">16:9</span>
                                         </div>
-                                        <h4 className="font-semibold text-sm">YouTube / FB</h4>
+                                        <h4 className="font-semibold text-xs sm:text-sm">YouTube / FB</h4>
                                         <p className="text-xs text-muted-foreground">1920x1080px</p>
                                         <Badge variant="secondary" className="mt-1 text-xs">Horizontal</Badge>
                                     </CardContent>
