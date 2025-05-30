@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import {
-  ShieldCheck, Palette, Type, ImageIcon, DownloadCloud, Search, UploadCloud, AlertTriangle, Lightbulb, CheckCircle2, XCircle, FileText, Settings, RefreshCw, Eye, BarChart2, ListChecks, MessageSquare, Users, Zap, Bot, Edit3, Copy, Trash2, Info, Briefcase, Music2, Font, LayoutGrid, Loader2, ExternalLink, Maximize2, Minimize2, Palette as PaletteIcon, Sparkles
+  ShieldCheck, Palette, Type, ImageIcon, DownloadCloud, Search, UploadCloud, AlertTriangle, Lightbulb, CheckCircle2, XCircle, FileText, Settings, RefreshCw, Eye, BarChart2, ListChecks, MessageSquare, Users, Zap, Bot, Edit3, Copy, Trash2, Info, Briefcase, Music2, LayoutGrid, Loader2, ExternalLink, Maximize2, Minimize2, Palette as PaletteIcon, Sparkles
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
@@ -110,9 +110,9 @@ const mockBrandAssets: BrandAsset[] = [
 ];
 
 const BrandIdentity = () => {
-  const [overallBrandScore, setOverallBrandScore] = useState(88);
-  const [complianceRate, setComplianceRate] = useState(92);
-  const [recentViolations, setRecentViolations] = useState<Violation[]>(mockRecentViolations);
+  const [overallBrandScore, _setOverallBrandScore] = useState(88);
+  const [complianceRate, _setComplianceRate] = useState(92);
+  const [recentViolations, _setRecentViolations] = useState<Violation[]>(mockRecentViolations);
   
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [uploadedFilePreview, setUploadedFilePreview] = useState<string | null>(null);
@@ -272,7 +272,7 @@ const BrandIdentity = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold text-primary">{overallBrandScore}/100</div>
-                <Progress value={overallBrandScore} className="mt-2 h-3" indicatorClassName={overallBrandScore > 80 ? 'bg-green-500' : overallBrandScore > 60 ? 'bg-yellow-500' : 'bg-red-500'} />
+                <Progress value={overallBrandScore} className="mt-2 h-3" />
                 <p className="text-xs text-muted-foreground mt-1">Average score of all analyzed content.</p>
               </CardContent>
             </Card>
@@ -283,7 +283,7 @@ const BrandIdentity = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold text-green-600">{complianceRate}%</div>
-                <Progress value={complianceRate} className="mt-2 h-3" indicatorClassName="bg-green-500" />
+                <Progress value={complianceRate} className="mt-2 h-3" />
                 <p className="text-xs text-muted-foreground mt-1">Percentage of content meeting key brand guidelines.</p>
               </CardContent>
             </Card>

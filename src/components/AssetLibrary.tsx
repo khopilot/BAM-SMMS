@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useCallback } from 'react';
 import {
-  LayoutGrid, List, Search as SearchIcon, UploadCloud, Trash2, Download, Share2, Eye, Sparkles, FolderKanban, Tags, CheckCircle2, XCircle, Maximize2, FileText, ImageIcon, Music2, Palette, Briefcase, Bot, RotateCcw, ZoomIn, ExternalLink, Loader2, FolderPlus, FolderSymlink, PackageSearch, Layers3, ChevronsUpDown, Check, DatabaseZap, Type as TypeIcon, Clock, TrendingUp, ShieldCheck, ChevronLeft
+  LayoutGrid, List, Search as SearchIcon, UploadCloud, Trash2, Download, Share2, Eye, Sparkles, FolderKanban, Tags, CheckCircle2, XCircle, Maximize2, FileText, ImageIcon, Palette, Briefcase, Bot, RotateCcw, ZoomIn, ExternalLink, Loader2, FolderPlus, FolderSymlink, PackageSearch, Layers3, ChevronsUpDown, Check, DatabaseZap, Type as TypeIcon, Clock, TrendingUp, ShieldCheck, ChevronLeft
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
@@ -174,7 +174,7 @@ const mockSmartCollections: SmartCollection[] = [
 const AssetLibrary = () => {
   const [assets, setAssets] = useState<Asset[]>(mockAssets);
   const [folders, setFolders] = useState<Folder[]>(mockFolders);
-  const [smartCollections, setSmartCollections] = useState<SmartCollection[]>(mockSmartCollections);
+  const [smartCollections, _setSmartCollections] = useState<SmartCollection[]>(mockSmartCollections);
   
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchTerm, setSearchTerm] = useState('');
@@ -417,7 +417,7 @@ const AssetLibrary = () => {
     let folder = currentFolder;
     while(folder) {
       crumbs.unshift(folder);
-      folder = folders.find(f => f.id === folder?.parentId);
+      folder = folders.find(f => f.id === folder?.parentId) || null;
     }
     return crumbs;
   }, [currentFolder, folders]);

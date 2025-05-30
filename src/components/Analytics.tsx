@@ -3,17 +3,15 @@ import {
   LineChart, Line, BarChart, Bar, PieChart, Pie, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell, Sector
 } from 'recharts';
 import {
-  Eye, TrendingUp, Users, DollarSign, PlayCircle, MessageCircle, Share2, ThumbsUp, BarChartBig, UserCheck, MapPin, Smartphone, Clock, CalendarDays, Download, RefreshCw, AlertCircle, Search, Filter, Settings, Info, Activity, Maximize2, Minimize2, ExternalLink, Lightbulb, Brain, Palette, FolderOpen, Video as VideoIcon, Loader2
+  Eye, TrendingUp, Users, DollarSign, ThumbsUp, Download, RefreshCw, Info, Activity, Brain, Loader2
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from './ui/select';
-import { Progress } from './ui/progress';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Badge } from './ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
-import { format, subDays, subMonths, subYears, startOfMonth, endOfMonth, startOfYear, endOfYear } from 'date-fns';
-import { Input } from './ui/input';
+import { format, subDays, subMonths, startOfMonth, endOfMonth, startOfYear, subYears } from 'date-fns';
 import { Textarea } from './ui/textarea';
 import { ScrollArea } from './ui/scroll-area';
 
@@ -67,13 +65,6 @@ interface OptimalTime {
   engagementScore: number;
 }
 
-interface PlatformPerformance {
-  platform: 'TikTok' | 'YouTube' | 'Instagram';
-  views: number;
-  engagementRate: number;
-  followerGrowth: number;
-}
-
 // Mock Data Generation
 const generateRandomTimeSeries = (numPoints: number, metric: 'views' | 'engagement' | 'subscribers' | 'revenue', startDate: Date): TimeSeriesDataPoint[] => {
   const data: TimeSeriesDataPoint[] = [];
@@ -113,12 +104,6 @@ const locationDemographics: AudienceDemographic[] = [
 ];
 const deviceDemographics: AudienceDemographic[] = [
   { name: 'Mobile', value: 85 }, { name: 'Desktop', value: 12 }, { name: 'Tablet', value: 3 },
-];
-
-const mockPlatformPerformance: PlatformPerformance[] = [
-  { platform: 'YouTube', views: 3500000, engagementRate: 4.5, followerGrowth: 12000 },
-  { platform: 'TikTok', views: 8200000, engagementRate: 8.2, followerGrowth: 35000 },
-  { platform: 'Instagram', views: 2100000, engagementRate: 6.1, followerGrowth: 8500 },
 ];
 
 const mockOptimalTimes: OptimalTime[] = [
@@ -514,7 +499,7 @@ const Analytics = () => {
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie data={ageDemographics} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label activeIndex={activePieIndex} activeShape={renderActiveShape} onMouseEnter={onPieEnter}>
-                      {ageDemographics.map((entry, index) => (
+                      {ageDemographics.map((_, index) => (
                         <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
                       ))}
                     </Pie>
@@ -533,7 +518,7 @@ const Analytics = () => {
                     <YAxis dataKey="name" type="category" width={80} />
                     <Tooltip formatter={(value) => `${value}%`} />
                     <Bar dataKey="value" name="Percentage" fill="#82ca9d">
-                      {genderDemographics.map((entry, index) => (
+                      {genderDemographics.map((_, index) => (
                         <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
                       ))}
                     </Bar>
@@ -547,7 +532,7 @@ const Analytics = () => {
                 <ResponsiveContainer width="100%" height="100%">
                    <PieChart>
                     <Pie data={locationDemographics} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
-                       {locationDemographics.map((entry, index) => (
+                       {locationDemographics.map((_, index) => (
                         <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
                       ))}
                     </Pie>
@@ -566,7 +551,7 @@ const Analytics = () => {
                     <YAxis domain={[0, 100]} tickFormatter={(tick) => `${tick}%`} />
                     <Tooltip formatter={(value) => `${value}%`} />
                     <Bar dataKey="value" name="Percentage" fill="#ffc658">
-                       {deviceDemographics.map((entry, index) => (
+                       {deviceDemographics.map((_, index) => (
                         <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
                       ))}
                     </Bar>
