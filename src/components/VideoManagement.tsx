@@ -572,7 +572,7 @@ const VideoManagement = () => {
                   <span className="truncate">Video Library</span>
                 </span>
                 <Button 
-                  onClick={handleUpload} 
+                  onClick={handleUploadClick} 
                   size="sm" 
                   className="ml-2 flex-shrink-0 px-2 sm:px-3"
                   disabled={isUploading}
