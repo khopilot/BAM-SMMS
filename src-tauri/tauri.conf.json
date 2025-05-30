@@ -8,7 +8,7 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "Factory Starter App",
+    "productName": "BAM APP",
     "version": "0.1.0"
   },
   "tauri": {
@@ -34,7 +34,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.factory.starter-app",
+      "identifier": "com.bam.app",
       "targets": "all"
     },
     "security": {
@@ -48,7 +48,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "Factory Starter App",
+        "title": "BAM APP",
         "width": 800,
         "center": true,
         "decorations": true

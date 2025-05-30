@@ -27,19 +27,34 @@ import AssetLibrary from './components/AssetLibrary';
 // Placeholder components for each route
 const Dashboard = () => (
   <div className="p-6">
-    <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+    <div className="flex items-center mb-6">
+      <img src="/bam-logo.svg" alt="BAM Logo" className="h-16 mr-4" />
+      <div>
+        <h1 className="text-3xl font-bold">Welcome to BAM APP</h1>
+        <p className="text-muted-foreground">Your comprehensive Social Media Management Tool</p>
+      </div>
+    </div>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div className="bg-card text-card-foreground rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-semibold mb-4">Recent Videos</h2>
-        <p className="text-muted-foreground">No videos uploaded yet</p>
+      <div className="bg-card text-card-foreground rounded-lg shadow-md p-6 border-l-4 border-primary">
+        <h2 className="text-xl font-semibold mb-4 flex items-center">
+          <Video className="h-5 w-5 mr-2 text-primary" />
+          Video Management
+        </h2>
+        <p className="text-muted-foreground">Create content optimized for TikTok (9:16) and YouTube (16:9)</p>
       </div>
-      <div className="bg-card text-card-foreground rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-semibold mb-4">Performance</h2>
-        <p className="text-muted-foreground">No analytics data available</p>
+      <div className="bg-card text-card-foreground rounded-lg shadow-md p-6 border-l-4 border-secondary">
+        <h2 className="text-xl font-semibold mb-4 flex items-center">
+          <BarChart3 className="h-5 w-5 mr-2 text-secondary" />
+          Analytics Dashboard
+        </h2>
+        <p className="text-muted-foreground">Track performance across all your social media platforms</p>
       </div>
-      <div className="bg-card text-card-foreground rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-semibold mb-4">Tasks</h2>
-        <p className="text-muted-foreground">No pending tasks</p>
+      <div className="bg-card text-card-foreground rounded-lg shadow-md p-6 border-l-4 border-accent">
+        <h2 className="text-xl font-semibold mb-4 flex items-center">
+          <Palette className="h-5 w-5 mr-2 text-accent" />
+          Brand Identity
+        </h2>
+        <p className="text-muted-foreground">Maintain consistent branding with BAM's color palette</p>
       </div>
     </div>
   </div>
@@ -83,8 +98,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           {/* Logo */}
           <div className="flex items-center justify-center h-16 border-b border-sidebar-border">
             <div className="flex items-center space-x-2">
-              <div className="bg-accent text-accent-foreground w-8 h-8 rounded-md flex items-center justify-center font-bold">B</div>
-              <h1 className="text-2xl font-bold text-primary-foreground">BAM</h1>
+              <img src="/bam-icon.svg" alt="BAM Logo" className="w-8 h-8" />
+              <h1 className="text-2xl font-bold text-primary-foreground">BAM APP</h1>
             </div>
           </div>
 

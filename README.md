@@ -1,15 +1,35 @@
-# Factory Starter App
+# BAM APP
 
-A minimal cross-platform desktop application built with Tauri, React, and TypeScript. This starter app demonstrates how to build and run a real application using Factory.
+A powerful Social Media Management Tool built with Tauri, React, and TypeScript. BAM APP provides comprehensive tools for managing your social media presence across multiple platforms.
 
-## What is Tauri?
+## What is BAM APP?
 
-Tauri is a framework for building tiny, fast, and secure desktop applications using web technologies (HTML, CSS, JavaScript/TypeScript) alongside a Rust backend. This combination provides:
+BAM APP is a cross-platform desktop application that offers:
 
+- **Social Media Management**: Multi-platform content scheduling and management
+- **Video Optimization**: Support for 9:16 (TikTok/Reels) and 16:9 (YouTube/Facebook) formats
+- **Brand Identity Management**: Consistent branding with custom color palette (#FA1F15, #1F31C7, #FEC802)
+- **Analytics Dashboard**: Comprehensive metrics and performance tracking
+- **Content Assistant**: AI-powered content suggestions and optimization
+- **Asset Library**: Centralized brand assets and templates
+
+## Key Features
+
+- 🎨 **Brand Identity Manager** - Maintain consistent visual branding
+- 📱 **Video Management** - Upload, edit, and optimize videos for different platforms
+- 📊 **Analytics Dashboard** - Track performance across all your social channels
+- 🤖 **AI Content Assistant** - Get smart suggestions for titles, descriptions, and hashtags
+- 📚 **Asset Library** - Access brand-approved logos, templates, and resources
+- 🎯 **Multi-Platform Support** - Optimize content for TikTok, Instagram, YouTube, Facebook
+
+## Technology Stack
+
+BAM APP is built with Tauri, providing:
 - Cross-platform compatibility (Windows, macOS, Linux)
-- Small bundle sizes
+- Small bundle sizes (~30MB)
 - Native performance
 - Enhanced security
+- Modern web technologies (React, TypeScript, Tailwind CSS)
 
 ## Prerequisites
 
